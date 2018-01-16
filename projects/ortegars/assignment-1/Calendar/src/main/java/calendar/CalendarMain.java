@@ -161,7 +161,7 @@ public class CalendarMain {
 			System.out.println("The number of appointments between "+ todatDate +" and " + tomorrowDate);
 			calDays = new LinkedList<CalDay>();
 			calDays = timeTable.getApptRange(listAppts, today, tomorrow);
-			for (int i = 0; i < calDays.size(); i++)
+			for (int i = 0; i < calDays.size()-1; i++)
 				System.out.println(calDays.get(i).toString());
 		}
 		//delete a particular appointment from the list
