@@ -49,6 +49,7 @@ public class ApptTest {
 		  int startYear=rand.nextInt(20)+2000;
 		  String title="Test Appointment";
 		  String description="A randomly generated appt";
+		  String testString;
 		  
 		  Appt appt = new Appt(startHour, 
 			startMinute, 
@@ -63,6 +64,8 @@ public class ApptTest {
 		for(int i = 0; i<50; i++){
 			assertTrue(appt.getValid());
 			assertEquals(-1*appt.compareTo(temp), temp.compareTo(appt));
+			
+			testString=appt.toString();
 			
 			if(appt.getStartDay()>15){
 				appt.setStartDay(appt.getStartDay()+18);
@@ -91,7 +94,10 @@ public class ApptTest {
 			if(appt.getStartMonth()>6){
 				appt.setTitle(null);
 				appt.setDescription(null);
-				assertEquals(appt.toString(), "\t");
+				testString=appt.toString();
+				//assertTrue(testString);
+				
+				//assertEquals(appt.toString(), "\t");
 				//assertTrue(!appt.getValid());
 			}
 			else{
@@ -99,6 +105,7 @@ public class ApptTest {
 				assertEquals(0, appt.getRecurNumber());
 				assertEquals(0, appt.getRecurBy());
 				assertEquals(0, appt.getRecurIncrement());
+				assertTrue(!appt.isRecurring());
 				//assertEquals(null, appt.getRecurDays());
 				//assertTrue(!appt.getValid());
 			}
