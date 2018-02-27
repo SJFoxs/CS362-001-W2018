@@ -118,12 +118,12 @@ public class ApptRandomTest {
                   long randomseed =System.currentTimeMillis();
                   Random random = new Random(randomseed);
                   
-                  for(int startMonth = 1; startMonth < 12; startMonth++){
-                      int startHour=ValuesGenerator.RandInt(random);
-                      int startMinute=ValuesGenerator.RandInt(random);
-                      int startDay=ValuesGenerator.RandInt(random);;
-                      //int startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 11);
-                      int startYear=ValuesGenerator.RandInt(random);
+                  //for(int startMonth = 1; startMonth < 13; startMonth++){
+                      int startHour=random.nextInt(41);
+                      int startMinute=random.nextInt(80);
+                      int startDay=random.nextInt(45);
+                      int startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 12);
+                      int startYear=random.nextInt(2500);
                       String title="Birthday Party";
                       String description="This is my birthday party.";
                                
@@ -141,18 +141,28 @@ public class ApptRandomTest {
                               if(startMinute<0 || startMinute>59)
                                   assertTrue(!appt.getValid());
                               else
-                                  if(startDay<1 || startDay>CalendarUtil.NumDaysInMonth(appt.getStartMonth(), appt.getStartYear()))
-                                      assertNotNull(1);
+                                  if(startDay<1 || startDay>CalendarUtil.NumDaysInMonth(appt.getStartYear(), appt.getStartMonth()-1))
+                                      assertTrue(!appt.getValid());
                                   else
                                       if(startMonth<1 || startMonth>12)
                                           assertTrue(!appt.getValid());
                                       else
                                           assertTrue(appt.getValid());
+									  
+						  if(ValuesGenerator.getBoolean(.5f, random)){
+							  appt.setRecurrence(null, 0,0,0);
+							  assertEquals(appt.getRecurDays().length, 0);
+						  }
+						  else{
+							  int[] arr = {1,2};
+							  appt.setRecurrence(arr, 0, 0, 0);
+							  assertEquals(appt.getRecurDays().length, 2);
+						  }
                          
-                          startHour=ValuesGenerator.RandInt(random);
-                          startMinute=ValuesGenerator.RandInt(random);
-                          startDay=ValuesGenerator.RandInt(random);;
-                      //int startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 11);
+                          startHour=ValuesGenerator.getRandomIntBetween(random, -40, 40);
+                          startMinute=ValuesGenerator.getRandomIntBetween(random, -40, 80);
+                          startDay=ValuesGenerator.getRandomIntBetween(random,-10, 40);
+						  startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 11);
                           startYear=ValuesGenerator.RandInt(random);
                           
                           appt.setStartHour(startHour);
@@ -160,7 +170,7 @@ public class ApptRandomTest {
                           appt.setStartDay(startDay);
                           appt.setStartYear(startYear);
                       }
-                  }
+                  //}
               } catch(NullPointerException e){
                   //hfgd
               }
