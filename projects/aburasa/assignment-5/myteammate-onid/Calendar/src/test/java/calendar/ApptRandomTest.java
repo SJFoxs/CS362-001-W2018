@@ -51,7 +51,7 @@ public class ApptRandomTest {
      * Generate Random Tests that tests Appt Class.
      */
 	 @Test
-	  public void radnomtest()  throws Throwable  {
+	  public void randomtest()  throws Throwable  {
 
 		 long startTime = Calendar.getInstance().getTimeInMillis();
 		 long elapsed = Calendar.getInstance().getTimeInMillis() - startTime;
@@ -108,6 +108,74 @@ public class ApptRandomTest {
 	 
 		 System.out.println("Done testing...");
 	 }
+          
+          @Test
+          public void randomtest02() throws Throwable {
+              long startTime = Calendar.getInstance().getTimeInMillis();
+              long elapsed = Calendar.getInstance().getTimeInMillis() - startTime;
+              
+              try{
+                  long randomseed =System.currentTimeMillis();
+                  Random random = new Random(randomseed);
+                  
+                  //for(int startMonth = 1; startMonth < 13; startMonth++){
+                      int startHour=random.nextInt(41);
+                      int startMinute=random.nextInt(80);
+                      int startDay=random.nextInt(45);
+                      int startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 12);
+                      int startYear=random.nextInt(2500);
+                      String title="Birthday Party";
+                      String description="This is my birthday party.";
+                               
+                      Appt appt = new Appt(startHour,
+				          startMinute ,
+				          startDay ,
+				          startMonth ,
+				          startYear ,
+				          title,
+				         description);
+                      for(int i =0; i<1000; i++){
+                          if(startHour<0 || startHour>23)
+                              assertTrue(!appt.getValid());
+                          else
+                              if(startMinute<0 || startMinute>59)
+                                  assertTrue(!appt.getValid());
+                              else
+                                  if(startDay<1 || startDay>CalendarUtil.NumDaysInMonth(appt.getStartYear(), appt.getStartMonth()-1))
+                                      assertTrue(!appt.getValid());
+                                  else
+                                      if(startMonth<1 || startMonth>12)
+                                          assertTrue(!appt.getValid());
+                                      else
+                                          assertTrue(appt.getValid());
+									  
+						  if(ValuesGenerator.getBoolean(.5f, random)){
+							  appt.setRecurrence(null, 0,0,0);
+							  assertEquals(appt.getRecurDays().length, 0);
+						  }
+						  else{
+							  int[] arr = {1,2};
+							  appt.setRecurrence(arr, 0, 0, 0);
+							  assertEquals(appt.getRecurDays().length, 2);
+						  }
+                         
+                          startHour=ValuesGenerator.getRandomIntBetween(random, -40, 40);
+                          startMinute=ValuesGenerator.getRandomIntBetween(random, -40, 80);
+                          startDay=ValuesGenerator.getRandomIntBetween(random,-10, 40);
+						  startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 11);
+                          startYear=ValuesGenerator.RandInt(random);
+                          
+                          appt.setStartHour(startHour);
+                          appt.setStartMinute(startMinute);
+                          appt.setStartDay(startDay);
+                          appt.setStartYear(startYear);
+                      }
+                  //}
+              } catch(NullPointerException e){
+                  //hfgd
+              }
+
+          }
 
 
 	
