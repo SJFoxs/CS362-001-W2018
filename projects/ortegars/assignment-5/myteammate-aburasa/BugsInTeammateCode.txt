@@ -1,0 +1,29 @@
+Bug-Reports:
+
+Unique ID: CalendarUtil Bug
+
+Symptom: Out of Array Bounds error 
+
+Cause: When the isValid method calls NumDaysInMonth with a starting month variable outside of 1-12. Where the array is available between 0-11, and a change between will cause it to throw an error.
+
+Duplication: Set month at 0 or 13, will cause it to trigger it every time. 
+
+Software version: assignment 5
+
+Estimated Severity: Extremely Severe, as the bug can cause an incorrect month to completely crash the program without any form of recovery
+
+Estimated Priority: A priority as the bug can cause the program to crash completely, a simple check prior to accessing the array and returning 0 can fix the error.
+
+Unique ID: permute TimeTable bug
+
+Symptom: LinkedList appts does not get sorted correctly with int array pv
+
+Cause: When the method permute uses the int array pv to sort the LinkedList with swap, it uses the same place in the array to swap the same elements. So the LinkedList stays the same no matter the int array pv inputs are. 
+
+Duplication: Running the permute method and attempting to swap different parts of the LinkedList appts.
+
+Software version: Assignment 5
+
+Estimated Severity: Severe, as there is currently no method that will allow a LinkedList to change appointments outside of getApptRange which is not perfect at sorting between minutes of appts.
+
+Estimated Priority: High Importance, unless the user decides to input appts in the correct order the Calendar program has no way to organize them successfully. Any attempts at sorting with this method is a fruitless endeavor. 
